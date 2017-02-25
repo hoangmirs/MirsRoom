@@ -1,0 +1,25 @@
+{
+  "name": "mirsroom",
+  "version": "1.0.0",
+  "description": "Smart room of Mirs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangmirs/MirsRoom.git"
+  },
+  "keywords": [
+    "mirsroom",
+    "smartroom",
+    "iot",
+    "raspberry"
+  ],
+  "author": "Hoang Mirs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoangmirs/MirsRoom/issues"
+  },
+  "homepage": "https://github.com/hoangmirs/MirsRoom#readme"
+}
