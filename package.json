@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/hoangmirs/MirsRoom#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "express": "^4.14.1",
+    "grunt-cli": "^1.2.0",
     "onoff": "^1.1.2",
     "socketio": "^1.0.0"
   }
