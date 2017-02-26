@@ -26,7 +26,7 @@
 
     <script src="/socket.io/socket.io.js"></script> <!-- thêm thư viện để dùng được các hàm websocket client - file này sẽ được tạo file mở socket server -->
     <script>
-    var socket = io.connect('http://192.168.1.8:6969');
+    var socket = io.connect('http://192.168.1.7:6969');
     socket.on('connect', function () {
       console.log();
       console.log("Đã kết nối tới socket server");
