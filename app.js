@@ -6,7 +6,8 @@ var path = require('path');
 var Gpio = require('onoff').Gpio;
 var table_light = new Gpio(17, 'out');
 var fan = new Gpio(18, 'out');
-
+var ds18b20 = require('ds18b20');
+var interval = 3000;
 var roomData = {};
 
 app.set('port', (process.env.PORT || 6969));
@@ -18,8 +19,21 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
+  // ds18b20.sensors(function (err, id) {
+  //   console.log(id);
+  //   console.log(err);
+  //   roomData.temp.id = id;
+  // });
+  // setInterval(function () {
+  //     ds18b20.temperature(roomData.temp.id, function (err, value) {
+  //         //send temperature reading out to connected clients T(°F) = T(°C) × 9/5 + 32
+  //         roomData.temp.value = value;
+  //         socket.emit("response_data", roomData);
+  //     });
+  // }, interval);
+  set_room_data(socket);
   socket.on('request_data', function() {
-    socket.emit("response_data", roomData)
+    update_roomData(socket);
   });
   socket.on('update_table_light', function() {
     roomData.table_light_status = roomData.table_light_status == 1 ? 0 : 1;
@@ -41,17 +55,22 @@ http.listen(app.get('port'), function() {
 
 function update_table_light(socket) {
   table_light.writeSync(roomData.table_light_status);
-  socket.emit("response_data", roomData)
+  update_roomData(socket)
 }
 
 function update_fan(socket) {
   fan.writeSync(roomData.fan_status);
-  socket.emit("response_data", roomData)
+  update_roomData(socket)
 }
 
-function set_room_data() {
+function set_room_data(socket) {
   roomData = {
     table_light_status: table_light.readSync(),
     fan_status: fan.readSync()
   };
+  update_roomData(socket)
+}
+
+function update_roomData(socket) {
+  io.sockets.emit("response_data", roomData)
 }
