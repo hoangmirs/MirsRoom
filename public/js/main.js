@@ -1,4 +1,3 @@
-
 var socket = io();
 var vm = new Vue({
   el: '#app',
@@ -24,12 +23,41 @@ socket.on('connect', function () {
   socket.emit("request_data")
 });
 
+socket.on('response_pir', function (value) {
+  console.log("PIR: " + value);
+  sayGreeting(value);
+});
+
+var sayGreeting = function(value) {
+  var msg = new SpeechSynthesisUtterance();
+  var voices = window.speechSynthesis.getVoices();
+  msg.voice = voices[5];
+  msg.volume = 1; // 0 to 1
+  if (value == 1) {
+    msg.text = 'Xin chao';
+  } else {
+    msg.text = 'Hahaha';
+  }
+
+  msg.lang = 'en-US';
+
+  msg.onend = function(e) {
+    console.log('Finished in ' + event.elapsedTime + ' seconds.');
+  };
+
+  speechSynthesis.speak(msg);
+}
+
 var update_table_light = function() {
-  socket.emit("update_table_light") // gửi sự kiện "bật" đến Server
+  socket.emit("update_table_light")
 }
 
 var update_fan = function() {
-  socket.emit("update_fan") // gửi sự kiện "bật" đến Server
+  socket.emit("update_fan")
+}
+
+var update_greeting = function() {
+  socket.emit("update_greeting")
 }
 
 var reconnect = function() {

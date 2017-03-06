@@ -35,6 +35,14 @@
               </button>
             </div>
           </div>
+          <div class="form-group">
+            <label>Greeting:</label>
+            <div class="col-md-offset-4 col-md-8">
+              <button class="btn" onclick="update_greeting()" :class="roomData.greeting_status == 1 ? 'btn-danger' : 'btn-success'">
+                {{roomData.greeting_status == 1 ? 'Turn off' : 'Turn on'}}
+              </button>
+            </div>
+          </div>
           <div v-if="false" class="form-group">
             <label>Config IP:</label>
             <div class="col-md-8">
