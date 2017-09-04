@@ -20,18 +20,23 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-  // ds18b20.sensors(function (err, id) {
-  //   console.log(id);
-  //   console.log(err);
-  //   roomData.temp.id = id;
-  // });
-  // setInterval(function () {
-  //     ds18b20.temperature(roomData.temp.id, function (err, value) {
-  //         //send temperature reading out to connected clients T(°F) = T(°C) × 9/5 + 32
-  //         roomData.temp.value = value;
-  //         socket.emit("response_data", roomData);
-  //     });
-  // }, interval);
+  ds18b20.sensors(function (err, ids) {
+    console.log(err);
+    roomData.temp = {};
+    roomData.temp.id = ids;
+  });
+  setInterval(function () {
+    if (roomData.temp) {
+      ds18b20.temperature(roomData.temp.id, function (err, value) {
+        //send temperature reading out to connected clients T(°F) = T(°C) × 9/5 + 32
+        console.log(value);
+        if (roomData.temp) {
+          roomData.temp.value = value;
+          socket.emit("response_data", roomData);
+        }
+      });
+    }
+  }, interval);
   pir.watch(function(err, value) {
     if (err) {
       throw err;

@@ -43,6 +43,14 @@
               </button>
             </div>
           </div>
+          <div class="form-group">
+            <label>Temp:</label>
+            <div class="col-md-offset-4 col-md-8">
+              <h2 v-if="roomData.temp">
+                {{roomData.temp.value}}
+              </h2>
+            </div>
+          </div>
           <div v-if="false" class="form-group">
             <label>Config IP:</label>
             <div class="col-md-8">
