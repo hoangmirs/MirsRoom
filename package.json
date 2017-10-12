@@ -10,12 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/hoangmirs/MirsRoom.git"
   },
-  "keywords": [
-    "mirsroom",
-    "smartroom",
-    "iot",
-    "raspberry"
-  ],
+  "keywords": ["mirsroom", "smartroom", "iot", "raspberry"],
   "author": "Hoang Mirs",
   "license": "ISC",
   "bugs": {
